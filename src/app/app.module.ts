@@ -10,9 +10,10 @@ import { CoronavirusComponent } from './coronavirus/coronavirus.component';
 import { HistoryComponent } from './history/history.component';
 import { LatestStatusComponent } from './latest-status/latest-status.component';
 import { LatestStatusByCountryComponent } from './latest-status-by-country/latest-status-by-country.component';
+import { Codiv19SubDetailComponent } from './codiv19-sub-detail/codiv19-sub-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, CoronavirusComponent, HistoryComponent, LatestStatusComponent, LatestStatusByCountryComponent],
+  declarations: [AppComponent, CoronavirusComponent, HistoryComponent, LatestStatusComponent, LatestStatusByCountryComponent, Codiv19SubDetailComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
