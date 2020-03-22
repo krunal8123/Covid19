@@ -16,7 +16,7 @@ export class Covid19Service {
   X_RAPIDAPI_HOST: string = environment.X_RAPIDAPI_HOST;
   X_RAPIDAPI_KEY: string = environment.X_RAPIDAPI_KEY;
 
-  constructor(private HttpClient: HttpClient) { }
+  constructor(private HttpClient: HttpClient) {}
 
   GetCasesByCountry() {
     let header = new HttpHeaders()
@@ -40,7 +40,7 @@ export class Covid19Service {
 
     return this.HttpClient.get(this.api + "affected.php", {
       headers: header
-    })
+    });
   }
 
   GetHistoryByParticularCountry(CountryName: string) {
@@ -76,7 +76,6 @@ export class Covid19Service {
   }
 
   GetWorldStatus() {
-
     let header = new HttpHeaders()
       .set("x-rapidapi-host", "coronavirus-monitor.p.rapidapi.com")
       .set(
@@ -88,5 +87,7 @@ export class Covid19Service {
       headers: header
     });
   }
-
+  copy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
 }
