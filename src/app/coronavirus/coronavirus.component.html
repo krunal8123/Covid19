@@ -1,4 +1,14 @@
 <div class="example-container mat-elevation-z8">
+  <div class="search-box-wrp">
+    <i class="fa fa-search" aria-hidden="true"></i>
+    <input
+      type="text"
+      class="search-box"
+      #myInput
+      placeholder="Search"
+      (input)="filterSearchItem(myInput.value)"
+    />
+  </div>
   <table
     mat-table
     matSort

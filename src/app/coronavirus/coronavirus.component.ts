@@ -25,7 +25,7 @@ export class CoronavirusComponent implements OnInit {
     "total_cases_per_1m_population"
   ];
   dataLoading: boolean = true;
-  dataSource = new MatTableDataSource([]);
+  dataSource: any;
   sortedData: any;
   constructor(private Covid19Service: Covid19Service) {}
 
@@ -78,6 +78,28 @@ export class CoronavirusComponent implements OnInit {
       }
     });
     this.sortedData = this.Covid19Service.copy(this.dataSource);
+  }
+  filterSearchItem(value) {
+    if (!value) {
+      this.sortedData = this.Covid19Service.copy(this.dataSource);
+    } else {
+      this.sortedData = this.dataSource.filter(
+        item =>
+          item.country_name.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+          item.cases.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+          item.new_cases.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+          item.deaths.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+          item.new_deaths.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+          item.total_recovered.toLowerCase().indexOf(value.toLowerCase()) >
+            -1 ||
+          item.active_cases.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+          item.serious_critical.toLowerCase().indexOf(value.toLowerCase()) >
+            -1 ||
+          item.total_cases_per_1m_population
+            .toLowerCase()
+            .indexOf(value.toLowerCase()) > -1
+      );
+    }
   }
 }
 function compare(a: number | string, b: number | string, isAsc: boolean) {
