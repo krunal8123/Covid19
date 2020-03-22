@@ -15,59 +15,102 @@
     (matSortChange)="sortData($event)"
     [dataSource]="sortedData"
   >
-    <ng-container matColumnDef="country_name" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
-      <td mat-cell *matCellDef="let element">{{ element.country_name }}</td>
+    <ng-container matColumnDef="country_name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >Country</mat-header-cell
+      >
+      <mat-cell mat-cell class="nameCss" *matCellDef="let element">
+        {{ element.country_name }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="cases">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Cases</th>
-      <td mat-cell *matCellDef="let element">{{ element.cases }}</td>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >Total Cases</mat-header-cell
+      >
+      <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
+        {{ element.cases }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="new_cases">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>New Cases</th>
-      <td mat-cell *matCellDef="let element">{{ element.new_cases }}</td>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >New Cases</mat-header-cell
+      >
+      <mat-cell
+        [class.newcases]="element.new_cases != '0'"
+        [class.globalTdCss]="element.new_cases == '0'"
+        mat-cell
+        *matCellDef="let element"
+      >
+        {{ element.new_cases }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="deaths">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Deaths</th>
-      <td mat-cell *matCellDef="let element">{{ element.deaths }}</td>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >Total Deaths</mat-header-cell
+      >
+      <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
+        {{ element.deaths }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="new_deaths">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>New Deaths</th>
-      <td mat-cell *matCellDef="let element">{{ element.new_deaths }}</td>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >New Deaths</mat-header-cell
+      >
+      <mat-cell
+        mat-cell
+        [class.deaths]="element.new_deaths != '0'"
+        [class.globalTdCss]="element.new_deaths == '0'"
+        *matCellDef="let element"
+      >
+        {{ element.new_deaths }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="total_recovered">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Recovered</th>
-      <td mat-cell *matCellDef="let element">{{ element.total_recovered }}</td>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >Total Recovered</mat-header-cell
+      >
+      <mat-cell mat-cell class="totalRecovered" *matCellDef="let element">
+        {{ element.total_recovered }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="active_cases">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Active Cases</th>
-      <td mat-cell *matCellDef="let element">{{ element.active_cases }}</td>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
+        >Active Cases</mat-header-cell
+      >
+      <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
+        {{ element.active_cases }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="serious_critical">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>
         Serious, Critical
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.serious_critical }}</td>
+      </mat-header-cell>
+      <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
+        {{ element.serious_critical }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="total_cases_per_1m_population">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>
         Total Cases/1M Pop
-      </th>
-      <td mat-cell *matCellDef="let element">
+      </mat-header-cell>
+      <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
         {{ element.total_cases_per_1m_population }}
-      </td>
+      </mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <mat-header-row
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></mat-header-row>
+    <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </table>
 
   <div class="center">

@@ -8,20 +8,39 @@ table {
   width: 100%;
 }
 
-td.mat-column-star {
-  width: 20px;
-  padding-right: 8px;
+.newcases {
+  font-weight: bold;
+  width: 5%;
+  background-color: #ffeeaa;
+  text-align: center;
+}
+.globalTdCss {
+  font-weight: bold;
+  text-align: center;
+  width: 5%;
+}
+.nameCss {
+  font-weight: bold;
+  width: 20%;
+}
+.deaths {
+  font-weight: bold;
+  width: 5%;
+  background-color: red;
+  text-align: center;
+  color: white;
+}
+.totalRecovered {
+  font-weight: bold;
+  width: 5%;
+  text-align: center;
+}
+mat-cell {
+  display: flex !important;
+  justify-content: center !important;
 }
 
-th.mat-column-position,
-td.mat-column-position {
-  padding-left: 8px;
-}
-
-.mat-table-sticky:first-child {
-  border-right: 1px solid #e0e0e0;
-}
-
-.mat-table-sticky:last-child {
-  border-left: 1px solid #e0e0e0;
+mat-header-cell {
+  display: flex;
+  justify-content: center;
 }
