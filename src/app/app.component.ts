@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  constructor(private _configs: ConfigService) {}
+  constructor() {}
   displayedColumns = [
     "Country",
     "position",
