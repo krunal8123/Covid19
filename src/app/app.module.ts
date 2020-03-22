@@ -7,9 +7,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { HttpClientModule } from "@angular/common/http";
 import { CoronavirusComponent } from './coronavirus/coronavirus.component';
+import { HistoryComponent } from './history/history.component';
+import { LatestStatusComponent } from './latest-status/latest-status.component';
 
 @NgModule({
-  declarations: [AppComponent, CoronavirusComponent],
+  declarations: [AppComponent, CoronavirusComponent, HistoryComponent, LatestStatusComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
