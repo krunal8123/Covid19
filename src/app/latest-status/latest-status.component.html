@@ -1,1 +1,30 @@
-<p>latest-status works!</p>
+<div *ngFor="let obj of LatestStatus">
+    <div class="row">
+        <label>Total Cases</label>
+        {{obj.total_cases}}
+    </div>
+    <div class="row">
+        <label>New Cases</label>
+        {{obj.new_cases}}
+    </div>
+    <div class="row">
+        <label>Active Cases</label>
+        {{obj.active_cases}}
+    </div>
+    <div class="row">
+        <label>Total Deaths</label>
+        {{obj.total_deaths}}
+    </div>
+    <div class="row">
+        <label>New Deaths</label>
+        {{obj.new_deaths}}
+    </div>
+    <div class="row">
+        <label>Recovered</label>
+        {{obj.total_recovered}}
+    </div>
+    <div class="row">
+        <label>Serious Critical</label>
+        {{obj.serious_critical}}
+    </div>
+</div>

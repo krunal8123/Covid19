@@ -17,4 +17,9 @@ export class Codiv19SubDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  close() {
+
+    this.removeSelectedCountryName.emit();
+  }
+
 }

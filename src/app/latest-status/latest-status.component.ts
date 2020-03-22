@@ -12,6 +12,7 @@ export class LatestStatusComponent implements OnInit {
   @Input() countryName: string = "";
   @Input() CurrentCountryName: string = "";
 
+  dataLoading = false;
   LatestStatus: LatestStatus[] = [];
 
   constructor(private Covid19Service: Covid19Service) { }
@@ -26,10 +27,15 @@ export class LatestStatusComponent implements OnInit {
   }
 
   GetLatestStatusByCountry() {
+
+    this.dataLoading = true;
     this.Covid19Service.GetLatestStatusByCountry(this.countryName).subscribe((data: any) => {
+      this.dataLoading = true;
       this.LatestStatus = data.latest_stat_by_country.map(result =>
         Object.assign(new LatestStatus(), result)
       );
+    }, (error) => {
+      this.dataLoading = false;
     });
   }
 
