@@ -1,88 +1,55 @@
 <div class="example-container mat-elevation-z8">
   <div class="search-box-wrp">
     <i class="fa fa-search" aria-hidden="true"></i>
-    <input
-      type="text"
-      class="search-box"
-      #myInput
-      placeholder="Search"
-      (input)="filterSearchItem(myInput.value)"
-    />
+    <input type="text" class="search-box" #myInput placeholder="Search" (input)="filterSearchItem(myInput.value)" />
   </div>
-  <table
-    mat-table
-    matSort
-    (matSortChange)="sortData($event)"
-    [dataSource]="sortedData"
-  >
+  <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedData" multiTemplateDataRows>
     <ng-container matColumnDef="country_name">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >Country</mat-header-cell
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
       <mat-cell mat-cell class="nameCss" *matCellDef="let element">
         {{ element.country_name }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="cases">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >Total Cases</mat-header-cell
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Total Cases</mat-header-cell>
       <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
         {{ element.cases }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="new_cases">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >New Cases</mat-header-cell
-      >
-      <mat-cell
-        [class.newcases]="element.new_cases != '0'"
-        [class.globalTdCss]="element.new_cases == '0'"
-        mat-cell
-        *matCellDef="let element"
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>New Cases</mat-header-cell>
+      <mat-cell [class.newcases]="element.new_cases != '0'" [class.globalTdCss]="element.new_cases == '0'" mat-cell
+        *matCellDef="let element">
         {{ element.new_cases }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="deaths">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >Total Deaths</mat-header-cell
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Total Deaths</mat-header-cell>
       <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
         {{ element.deaths }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="new_deaths">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >New Deaths</mat-header-cell
-      >
-      <mat-cell
-        mat-cell
-        [class.deaths]="element.new_deaths != '0'"
-        [class.globalTdCss]="element.new_deaths == '0'"
-        *matCellDef="let element"
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>New Deaths</mat-header-cell>
+      <mat-cell mat-cell [class.deaths]="element.new_deaths != '0'" [class.globalTdCss]="element.new_deaths == '0'"
+        *matCellDef="let element">
         {{ element.new_deaths }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="total_recovered">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >Total Recovered</mat-header-cell
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Total Recovered</mat-header-cell>
       <mat-cell mat-cell class="totalRecovered" *matCellDef="let element">
         {{ element.total_recovered }}
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="active_cases">
-      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header
-        >Active Cases</mat-header-cell
-      >
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Active Cases</mat-header-cell>
       <mat-cell mat-cell class="globalTdCss" *matCellDef="let element">
         {{ element.active_cases }}
       </mat-cell>
@@ -106,11 +73,23 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row
-      mat-header-row
-      *matHeaderRowDef="displayedColumns"
-    ></mat-header-row>
-    <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <app-codiv19-sub-detail [countryName]="element.country_name" [selectedCountryName]="selectedCountryName"
+            (removeSelectedCountryName)="removeSelectedCountryName()"></app-codiv19-sub-detail>
+
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element" (click)="setSelectedCountryName(element)">
+    </mat-row>
+    <tr *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+
   </table>
 
   <div class="center">

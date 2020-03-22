@@ -1,3 +1,5 @@
+
+
 .example-container {
   height: 100%;
   width: 100%;
@@ -6,6 +8,10 @@
 
 table {
   width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
 }
 
 .newcases {
@@ -44,3 +50,4 @@ mat-header-cell {
   display: flex;
   justify-content: center;
 }
+
