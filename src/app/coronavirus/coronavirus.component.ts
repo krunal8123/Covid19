@@ -26,11 +26,11 @@ export class CoronavirusComponent implements OnInit {
   ];
   dataLoading: boolean = true;
   dataSource = new MatTableDataSource([]);
+  sortedData: any;
   constructor(private Covid19Service: Covid19Service) {}
 
   ngOnInit() {
     this.GetCasesByCountry();
-    // this.dataSource.sort = this.sort;
   }
   GetCasesByCountry() {
     this.Covid19Service.GetCasesByCountry().subscribe((data: any) => {
@@ -42,7 +42,7 @@ export class CoronavirusComponent implements OnInit {
     });
   }
   sortData(sort: Sort) {
-    let data: any = this.dataSource.data.slice();
+    let data: any = this.dataSource;
     if (!sort.active || sort.direction === "") {
       this.dataSource = data;
       return;
@@ -51,20 +51,33 @@ export class CoronavirusComponent implements OnInit {
     this.dataSource = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
-        case "name":
-        // return compare(a.name, b.name, isAsc);
-        case "calories":
-        // return compare(a.calories, b.calories, isAsc);
-        case "fat":
-        // return compare(a.fat, b.fat, isAsc);
-        case "carbs":
-        // return compare(a.carbs, b.carbs, isAsc);
-        case "protein":
-        // return compare(a.protein, b.protein, isAsc);
+        case "country_name":
+          return compare(a.country_name, b.country_name, isAsc);
+        case "cases":
+          return compare(a.cases, b.cases, isAsc);
+        case "new_cases":
+          return compare(a.new_cases, b.new_cases, isAsc);
+        case "deaths":
+          return compare(a.deaths, b.deaths, isAsc);
+        case "new_deaths":
+          return compare(a.new_deaths, b.new_deaths, isAsc);
+        case "total_recovered":
+          return compare(a.total_recovered, b.total_recovered, isAsc);
+        case "active_cases":
+          return compare(a.active_cases, b.active_cases, isAsc);
+        case "serious_critical":
+          return compare(a.serious_critical, b.serious_critical, isAsc);
+        case "total_cases_per_1m_population":
+          return compare(
+            a.total_cases_per_1m_population,
+            b.total_cases_per_1m_population,
+            isAsc
+          );
         default:
           return 0;
       }
     });
+    this.sortedData = this.Covid19Service.copy(this.dataSource);
   }
 }
 function compare(a: number | string, b: number | string, isAsc: boolean) {

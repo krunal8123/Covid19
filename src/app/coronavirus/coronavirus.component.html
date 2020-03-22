@@ -1,24 +1,25 @@
 <div class="example-container mat-elevation-z8">
-  <table mat-table matSort [dataSource]="dataSource">
-    <!-- Name Column -->
+  <table
+    mat-table
+    matSort
+    (matSortChange)="sortData($event)"
+    [dataSource]="sortedData"
+  >
     <ng-container matColumnDef="country_name" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
       <td mat-cell *matCellDef="let element">{{ element.country_name }}</td>
     </ng-container>
 
-    <!-- Position Column -->
     <ng-container matColumnDef="cases">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Cases</th>
       <td mat-cell *matCellDef="let element">{{ element.cases }}</td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="new_cases">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>New Cases</th>
       <td mat-cell *matCellDef="let element">{{ element.new_cases }}</td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="deaths">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Deaths</th>
       <td mat-cell *matCellDef="let element">{{ element.deaths }}</td>
