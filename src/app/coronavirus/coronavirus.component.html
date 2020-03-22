@@ -77,6 +77,7 @@
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+         
           <app-codiv19-sub-detail [countryName]="element.country_name" [selectedCountryName]="selectedCountryName"
             (removeSelectedCountryName)="removeSelectedCountryName()"></app-codiv19-sub-detail>
 
