@@ -16,7 +16,7 @@ export class Covid19Service {
   X_RAPIDAPI_HOST: string = environment.X_RAPIDAPI_HOST;
   X_RAPIDAPI_KEY: string = environment.X_RAPIDAPI_KEY;
 
-  constructor(private HttpClient: HttpClient) {}
+  constructor(private HttpClient: HttpClient) { }
 
   GetCasesByCountry() {
     let header = new HttpHeaders()
@@ -30,7 +30,7 @@ export class Covid19Service {
     });
   }
 
-  async GetAffectedCountries() {
+  GetAffectedCountries() {
     let header = new HttpHeaders()
       .set("x-rapidapi-host", "coronavirus-monitor.p.rapidapi.com")
       .set(
@@ -38,15 +38,12 @@ export class Covid19Service {
         "cfe2855d40mshb45703d05279605p189c97jsnc368394faf8e"
       );
 
-    this.HttpClient.get(this.api + "affected.php", {
+    return this.HttpClient.get(this.api + "affected.php", {
       headers: header
-    }).subscribe(async (data: any) => {
-      console.log(data);
-      return await data;
-    });
+    })
   }
 
-  async GetHistoryByParticularCountry(CountryName: string) {
+  GetHistoryByParticularCountry(CountryName: string) {
     let param: HttpParams = new HttpParams().set("country", CountryName);
 
     let header = new HttpHeaders()
@@ -56,16 +53,13 @@ export class Covid19Service {
         "cfe2855d40mshb45703d05279605p189c97jsnc368394faf8e"
       );
 
-    this.HttpClient.get(this.api + "cases_by_particular_country.php", {
+    return this.HttpClient.get(this.api + "cases_by_particular_country.php", {
       headers: header,
       params: param
-    }).subscribe(async (data: any) => {
-      console.log(data);
-      return await data;
     });
   }
 
-  async GetLatestStatusByCountry(CountryName: string) {
+  GetLatestStatusByCountry(CountryName: string) {
     let param: HttpParams = new HttpParams().set("country", CountryName);
 
     let header = new HttpHeaders()
@@ -75,12 +69,24 @@ export class Covid19Service {
         "cfe2855d40mshb45703d05279605p189c97jsnc368394faf8e"
       );
 
-    this.HttpClient.get(this.api + "latest_stat_by_country.php", {
+    return this.HttpClient.get(this.api + "latest_stat_by_country.php", {
       headers: header,
       params: param
-    }).subscribe(async (data: any) => {
-      console.log(data);
-      return await data;
     });
   }
+
+  GetWorldStatus() {
+
+    let header = new HttpHeaders()
+      .set("x-rapidapi-host", "coronavirus-monitor.p.rapidapi.com")
+      .set(
+        "x-rapidapi-key",
+        "cfe2855d40mshb45703d05279605p189c97jsnc368394faf8e"
+      );
+
+    return this.HttpClient.get(this.api + "worldstat.php", {
+      headers: header
+    });
+  }
+
 }
