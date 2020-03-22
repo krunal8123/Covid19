@@ -1,11 +1,16 @@
 import { Component } from "@angular/core";
+import { Covid19Service } from './Services/covid19.service';
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private Covid19Service: Covid19Service) {
+
+    this.GetCasesByCountry();
+
+  }
   displayedColumns = [
     "Country",
     "position",
@@ -17,6 +22,12 @@ export class AppComponent {
     "star"
   ];
   dataSource = ELEMENT_DATA;
+
+ async GetCasesByCountry() {
+
+    let Data = await this.Covid19Service.GetCasesByCountry();
+
+  }
 }
 export interface coronaData {
   name: string;
