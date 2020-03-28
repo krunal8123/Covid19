@@ -9,18 +9,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 @Component({
   selector: "app-coronavirus",
   templateUrl: "./coronavirus.component.html",
-  styleUrls: ["./coronavirus.component.css"],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ]
+  styleUrls: ["./coronavirus.component.css"]
 })
 export class CoronavirusComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  expandedElement: Corona;
   selectedCountryName: string = "";
   displayedColumns = [
     "country_name",
@@ -113,13 +105,11 @@ export class CoronavirusComponent implements OnInit {
 
   setSelectedCountryName(element: Corona) {
 
-    this.expandedElement = element;
     this.selectedCountryName = element.country_name;
   }
 
   removeSelectedCountryName() {
 
-    this.expandedElement = undefined;
     this.selectedCountryName = "";
   }
 }

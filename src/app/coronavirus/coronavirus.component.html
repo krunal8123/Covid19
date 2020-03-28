@@ -6,8 +6,8 @@
   <table mat-table matSort (matSortChange)="sortData($event)" [dataSource]="sortedData" multiTemplateDataRows>
     <ng-container matColumnDef="country_name">
       <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
-      <mat-cell mat-cell class="nameCss" *matCellDef="let element">
-        {{ element.country_name }}
+      <mat-cell mat-cell class="nameCss" *matCellDef="let element">        
+        <a [routerLink]="['/Country', element.country_name]">{{ element.country_name }}</a>
       </mat-cell>
     </ng-container>
 
@@ -72,25 +72,9 @@
         {{ element.total_cases_per_1m_population }}
       </mat-cell>
     </ng-container>
-
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-      <mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-         
-          <app-codiv19-sub-detail [countryName]="element.country_name" [selectedCountryName]="selectedCountryName"
-            (removeSelectedCountryName)="removeSelectedCountryName()"></app-codiv19-sub-detail>
-
-        </div>
-      </mat-cell>
-    </ng-container>
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element" (click)="setSelectedCountryName(element)">
+    <mat-row *matRowDef="let element; columns: displayedColumns;"  (click)="setSelectedCountryName(element)">
     </mat-row>
-    <tr *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
   </table>
 
   <div class="center">
@@ -98,3 +82,4 @@
     </mat-progress-spinner>
   </div>
 </div>
+

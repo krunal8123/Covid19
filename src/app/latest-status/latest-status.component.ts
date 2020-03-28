@@ -10,7 +10,6 @@ import { LatestStatus } from '../models/latest-status';
 export class LatestStatusComponent implements OnInit {
 
   @Input() countryName: string = "";
-  @Input() CurrentCountryName: string = "";
 
   dataLoading = false;
   LatestStatus: LatestStatus[] = [];
@@ -19,8 +18,7 @@ export class LatestStatusComponent implements OnInit {
 
   ngOnChanges(changes) {
 
-    if (this.countryName != this.CurrentCountryName &&
-      this.countryName.length > 0) {
+    if (this.countryName.length > 0) {
 
       this.GetLatestStatusByCountry();
     }

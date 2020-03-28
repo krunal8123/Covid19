@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-codiv19-sub-detail',
@@ -7,19 +8,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class Codiv19SubDetailComponent implements OnInit {
 
-  @Input() countryName: string = "";
-  @Input() selectedCountryName: string = "";
+  countryName:string="";
 
-  @Output() removeSelectedCountryName = new EventEmitter();
-
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.countryName = params.get('countryName');
+    });
   }
 
   close() {
-
-    this.removeSelectedCountryName.emit();
+    this.router.navigate(["coronavirus"]);
   }
 
 }

@@ -11,7 +11,6 @@ import { Color, Label } from "ng2-charts";
 })
 export class HistoryComponent implements OnInit {
   @Input() countryName: string = "";
-  @Input() CurrentCountryName: string = "";
   dataLoading: boolean = false;
 
   historyData: History[] = [];
@@ -34,14 +33,10 @@ export class HistoryComponent implements OnInit {
   /////////////////////////////////////////////////////
 
   constructor(private Covid19Service: Covid19Service) {
-    this.GetHistoryByParticularCountry();
   }
 
   ngOnChanges(changes) {
-    if (
-      this.countryName != this.CurrentCountryName &&
-      this.countryName.length > 0
-    ) {
+    if ( this.countryName.length > 0) {
       this.GetHistoryByParticularCountry();
     }
   }
