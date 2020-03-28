@@ -28,7 +28,7 @@ export class LatestStatusComponent implements OnInit {
 
     this.dataLoading = true;
     this.Covid19Service.GetLatestStatusByCountry(this.countryName).subscribe((data: any) => {
-      this.dataLoading = true;
+      this.dataLoading = false;
       this.LatestStatus = data.latest_stat_by_country.map(result =>
         Object.assign(new LatestStatus(), result)
       );

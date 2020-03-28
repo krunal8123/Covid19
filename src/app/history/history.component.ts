@@ -51,14 +51,7 @@ export class HistoryComponent implements OnInit {
         this.historyData = data.stat_by_country.map(result =>
           Object.assign(new History(), result)
         );
-        console.log(this.historyData);
         if (this.historyData.length > 0) {
-          // let firstRecord = new Date(
-          //   this.historyData[0].record_date
-          // ).toLocaleDateString("fr-CA");
-          // let lastRecord = new Date(
-          //   this.historyData[this.historyData.length - 1].record_date
-          // ).toLocaleDateString("fr-CA");
           let newCases = [];
           let totalCases = [];
           let activeCases = [];
