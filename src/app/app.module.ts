@@ -12,6 +12,7 @@ import { LatestStatusComponent } from "./latest-status/latest-status.component";
 import { LatestStatusByCountryComponent } from "./latest-status-by-country/latest-status-by-country.component";
 import { Codiv19SubDetailComponent } from "./codiv19-sub-detail/codiv19-sub-detail.component";
 import { ChartsModule } from "ng2-charts";
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,10 @@ import { ChartsModule } from "ng2-charts";
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ChartsModule
+    ChartsModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
